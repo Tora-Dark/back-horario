@@ -11,6 +11,6 @@ class Horario extends Model
     use HasFactory;
 
     public function clases(){
-        return $this->belongsToMany(Clase::class,'horarios_clases', 'clase_id','horario_id');
+        return $this->belongsToMany(Clase::class,'horarios_clases', 'horario_id','clase_id');
     }
 }

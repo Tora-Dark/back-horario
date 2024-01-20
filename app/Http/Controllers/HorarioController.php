@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clase;
 use Illuminate\Http\Request;
 use App\Models\Horario;
 
@@ -17,7 +18,23 @@ class HorarioController extends Controller
 
     public function show(Horario $horario)
     {
-        return response()->json($horario);
+          $clases= Clase::with('asignatura','local')->get() ;
+          $clasesHorario= $horario->clases;
+            $mergedClasses=[];
+
+            foreach ($clases as $clase) {
+                foreach ($clasesHorario as $clase2) {
+
+                if (($clase->id == $clase2->id)) {
+                    $mergedClasses[] = $clase;
+                }}}
+
+        $data=[
+            'clases'=> $mergedClasses,
+            'horario'=> $horario,
+
+        ];
+        return response()->json($data);
     }
 
     public function store(Request $request)
