@@ -27,11 +27,11 @@ class Clase extends Model
 
     public function brigadas()
     {
-        return $this->belongsToMany(Brigada::class, 'clases_brigadas', 'brigada_id','clases_id');
+        return $this->belongsToMany(Brigada::class, 'clases_brigadas','clases_id', 'brigada_id');
     }
 
     public function horario(){
-        return $this->belongsTo(Horario::class,'horario_id');
+        return $this->belongsToMany(Horario::class,'horarios_clases','clase_id','horario_id');
     }
 
 }

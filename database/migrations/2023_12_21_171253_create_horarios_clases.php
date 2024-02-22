@@ -15,18 +15,18 @@ return new class extends Migration
             $table->id();
 
 
-                $table->foreignId('horario_id')
-    ->constrained('horarios')
+            $table->foreignId('horario_id')
+                ->constrained('horarios')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();
 
-        $table->foreignId('clase_id')
-        ->constrained('clases')
-        ->cascadeOnDelete()
-        ->cascadeOnUpdate();
-    });
-}
+            $table->foreignId('clase_id')
+                ->constrained('clases')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+        });
+    }
 
     /**
      * Reverse the migrations.

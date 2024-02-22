@@ -15,15 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('tipo');
             $table->integer('turn');
-        $table->string('fecha');
-       $table->foreignId('asignatura_id')
-
-       ->constrained('asignaturas');
-
-
+            $table->string('fecha');
+            $table->foreignId('asignatura_id')
+                ->constrained('asignaturas')->onUpdate('cascade')
+                ->onDelete('cascade');;
 
 
-        $table->foreignId('local_id')->constrained('locals');
+
+
+            $table->foreignId('local_id')->constrained('locals');
 
             $table->timestamps();
         });

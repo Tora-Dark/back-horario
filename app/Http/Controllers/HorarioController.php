@@ -18,7 +18,7 @@ class HorarioController extends Controller
 
     public function show(Horario $horario)
     {
-          $clases= Clase::with('asignatura','local')->get() ;
+          $clases= Clase::with('asignatura','local','brigadas')->get() ;
           $clasesHorario= $horario->clases;
             $mergedClasses=[];
 

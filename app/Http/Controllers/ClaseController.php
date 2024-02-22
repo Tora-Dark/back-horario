@@ -12,7 +12,7 @@ class ClaseController extends Controller
      */
     public function index()
     {
-        $clases = Clase::with('asignatura','local')->get();
+        $clases = Clase::with('asignatura','local','horario','brigadas')->get();
         //return $clases to json response
 
 
@@ -43,7 +43,8 @@ class ClaseController extends Controller
 
      $clase->save();
 
-
+     $clase->brigadas()->sync($request->brigadas);
+     $clase->horario()->attach($request->semana);
 
      $data = [
 
