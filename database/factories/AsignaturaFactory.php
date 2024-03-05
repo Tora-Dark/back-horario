@@ -18,7 +18,7 @@ class AsignaturaFactory extends Factory
     {
         return [
             //
-            'nombre'=>fake()->name()
+            'nombre'=>fake()->randomElements(2)
         ];
     }
 }
