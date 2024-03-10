@@ -82,13 +82,13 @@ class ClaseController extends Controller
     public function update(Request $request, Clase $clase)
     {
 
-        $clase->tipo = $request->horas;
+        $clase->tipo = $request->tipo;
         $clase->turn = $request->turn;
         $clase->fecha = $request->fecha;
         $clase->asignatura_id = $request->asignatura_id;
         $clase->local_id = $request->local_id;
      $clase->save();
-     
+
      $clase->brigadas()->sync($request->brigadas);
      $clase->horario()->attach($request->semana);
 
