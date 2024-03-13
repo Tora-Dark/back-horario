@@ -109,7 +109,7 @@ class ClaseController extends Controller
         $clase->delete();
 
         $data = [
-            'message'=>'Clase editada satisfactoriamente',
+            'message'=>'Clase eliminada satisfactoriamente',
             'Clase'=> $clase
         ];
         return response()->json($data);
