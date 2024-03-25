@@ -12,6 +12,7 @@ class Clase extends Model
         'tipo',
         'turn',
         'fecha',
+        'color',
         'asignatura_id',
         'local_id',
     ];

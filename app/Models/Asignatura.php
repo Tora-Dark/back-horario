@@ -9,7 +9,7 @@ class Asignatura extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre','siglas','color'];
 
     protected function profesor(){
     return $this->belongsTo(Profesor::class);

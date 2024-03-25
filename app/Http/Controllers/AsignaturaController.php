@@ -23,6 +23,9 @@ class AsignaturaController extends Controller
     {
         $asignatura = new Asignatura();
         $asignatura->nombre = $request->nombre;
+        $asignatura->siglas = $request->siglas;
+        $asignatura->color = $request->color;
+
 
         $asignatura->save();
 
@@ -37,7 +40,7 @@ class AsignaturaController extends Controller
     public function show(Asignatura $asignatura)
     {
 
-     
+
       return response()->json($asignatura);
     }
 

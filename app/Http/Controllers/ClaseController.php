@@ -38,6 +38,7 @@ class ClaseController extends Controller
         $clase->tipo = $request->tipo;
         $clase->turn = $request->turn;
         $clase->fecha = $request->fecha;
+        $clase->color=$request->color;
         $clase->asignatura_id = $request->asignatura_id;
         $clase->local_id = $request->local_id;
 
@@ -85,6 +86,7 @@ class ClaseController extends Controller
         $clase->tipo = $request->tipo;
         $clase->turn = $request->turn;
         $clase->fecha = $request->fecha;
+        $clase->color=$request->color;
         $clase->asignatura_id = $request->asignatura_id;
         $clase->local_id = $request->local_id;
      $clase->save();

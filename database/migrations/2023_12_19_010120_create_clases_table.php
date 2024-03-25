@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('tipo');
             $table->integer('turn');
             $table->string('fecha');
+            $table->string('color');
             $table->foreignId('asignatura_id')
                 ->constrained('asignaturas')->onUpdate('cascade')
                 ->onDelete('cascade');;
