@@ -29,7 +29,16 @@ class CursosController extends Controller
      */
     public function store(StoreCursosRequest $request)
     {
-        //
+        $curso = new Cursos();
+        $curso->nombre = $request->nombre;
+        $curso->save();
+
+
+        $data = [
+            'message' => 'Curso creado satisfactoriamente',
+            'Curso' => $curso
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -51,16 +60,30 @@ class CursosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCursosRequest $request, Cursos $cursos)
+    public function update(UpdateCursosRequest $request, Cursos $curso)
     {
-        //
+        $curso->nombre = $request->nombre;
+        $curso->save();
+
+
+        $data = [
+            'message' => 'Curso creado satisfactoriamente',
+            'Curso' => $curso
+        ];
+        return response()->json($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cursos $cursos)
+    public function destroy(Cursos $curso)
     {
-        //
+        $curso->delete();
+
+        $data = [
+            'message' => 'curso eliminado satisfactoriamente',
+            'curso' => $curso
+        ];
+        return response()->json($data);
     }
 }

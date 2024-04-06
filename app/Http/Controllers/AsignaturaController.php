@@ -52,6 +52,8 @@ class AsignaturaController extends Controller
     public function update(Request $request, Asignatura $asignatura)
     {
         $asignatura->nombre = $request->nombre;
+        $asignatura->siglas = $request->siglas;
+        $asignatura->color = $request->color;
         $asignatura->save();
 
         $data = [
