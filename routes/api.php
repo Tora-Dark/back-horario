@@ -3,6 +3,7 @@
 use App\Http\Controllers\AsignaturaController;
 use App\Http\Controllers\BrigadaController;
 use App\Http\Controllers\ClaseController;
+use App\Http\Controllers\CursosController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\LocalController;
 use App\Http\Controllers\ProfesorController;
@@ -58,7 +59,14 @@ Route::get('/asignaturas/{asignatura}/edit', [AsignaturaController::class, 'edit
 Route::put('/asignaturas/{asignatura}', [AsignaturaController::class, 'update']);
 Route::delete('/asignaturas/{asignatura}', [AsignaturaController::class, 'destroy']);
 
-
+Route::controller(CursosController::class)->group(function () {
+    Route::get('/cursos', 'index');
+    Route::post('/cursos', 'store');
+    Route::get('/cursos/{curso}', 'show');
+    Route::put('/cursos/{curso}', 'update');
+    Route::delete('/cursos/{curso}', 'destroy');
+    Route::post('/cursos/clases', 'attach');
+});
 
 
 Route::controller(HorarioController::class)->group( function () {
@@ -68,4 +76,6 @@ Route::controller(HorarioController::class)->group( function () {
     Route::put('/horarios/{horario}','update');
     Route::delete('/horarios/{horario}','destroy');
     Route::post('/horarios/clases','attach');
+    Route::get('/horarios/Getmatriz/{horario}/{clase}','Getmatriz');
+
 });

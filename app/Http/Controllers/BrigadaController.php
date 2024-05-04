@@ -12,7 +12,7 @@ class BrigadaController extends Controller
      */
     public function index()
     {
-        $brigadas = Brigada::with('clases')->get();
+        $brigadas = Brigada::with('clases')->orderBy('nombre', 'asc')->get();
         return response()->json($brigadas);
     }
 

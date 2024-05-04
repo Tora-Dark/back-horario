@@ -1,10 +1,10 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Models\Cursos;
-use App\Http\Requests\StoreCursosRequest;
-use App\Http\Requests\UpdateCursosRequest;
+use Illuminate\Http\Request;
 
 class CursosController extends Controller
 {
@@ -13,7 +13,9 @@ class CursosController extends Controller
      */
     public function index()
     {
-        //
+        $cursos = Cursos::all();
+
+        return response()->json($cursos);
     }
 
     /**
@@ -27,7 +29,7 @@ class CursosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCursosRequest $request)
+    public function store(Request $request)
     {
         $curso = new Cursos();
         $curso->nombre = $request->nombre;
@@ -60,7 +62,7 @@ class CursosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCursosRequest $request, Cursos $curso)
+    public function update(Request $request, Cursos $curso)
     {
         $curso->nombre = $request->nombre;
         $curso->save();
@@ -73,17 +75,17 @@ class CursosController extends Controller
         return response()->json($data);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Cursos $curso)
-    {
-        $curso->delete();
+/**
+ * Remove the specified resource from storage.
+ */
+public function destroy(Cursos $curso)
+{
+    $curso->delete();
 
-        $data = [
-            'message' => 'curso eliminado satisfactoriamente',
-            'curso' => $curso
-        ];
-        return response()->json($data);
-    }
+    $data = [
+        'message' => 'curso eliminado satisfactoriamente',
+        'curso' => $curso
+    ];
+    return response()->json($data);
+}
 }

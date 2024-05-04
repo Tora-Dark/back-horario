@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brigada;
 use App\Models\Clase;
 use Illuminate\Http\Request;
 use App\Models\Horario;
@@ -18,20 +19,22 @@ class HorarioController extends Controller
 
     public function show(Horario $horario)
     {
-          $clases= Clase::with('asignatura','local','brigadas')->get() ;
-          $clasesHorario= $horario->clases;
-            $mergedClasses=[];
+        $clases = Clase::with('asignatura', 'local', 'brigadas')->get();
+        $clasesHorario = $horario->clases;
+        $mergedClasses = [];
 
-            foreach ($clases as $clase) {
-                foreach ($clasesHorario as $clase2) {
+        foreach ($clases as $clase) {
+            foreach ($clasesHorario as $clase2) {
 
                 if (($clase->id == $clase2->id)) {
                     $mergedClasses[] = $clase;
-                }}}
+                }
+            }
+        }
 
-        $data=[
-            'clases'=> $mergedClasses,
-            'horario'=> $horario,
+        $data = [
+            'clases' => $mergedClasses,
+            'horario' => $horario,
 
         ];
         return response()->json($data);
@@ -40,7 +43,8 @@ class HorarioController extends Controller
     public function store(Request $request)
     {
         $horario = new Horario();
-        $horario->semana = $request->semana;
+        $horariolast = Horario::latest('id')->first();
+        $horario->semana = $request->semana +  $horariolast->semana;
         $horario->save();
 
 
@@ -64,9 +68,9 @@ class HorarioController extends Controller
         return response()->json($data);
     }
 
-    public function destroy($horario)
+    public function destroy($id)
     {
-
+        $horario = Horario::find($id);
         $horario->delete();
 
         $data = [
@@ -89,5 +93,45 @@ class HorarioController extends Controller
 
         ];
         return response()->json($data);
+    }
+
+
+    public function Getmatriz(Horario $horario, Clase $clase)
+    {
+
+        $clases  = $horario->clases()->with('brigadas')->get();
+        $brigadas = $clase->brigadas()->get();
+        $matrizDisponibilidad = [];
+        for ($i = 0; $i < 6; $i++) {
+            $matrizDisponibilidad[$i] = array_fill(0, 5, true);
+        }
+        $cont = 0;
+        $brigadas_array = [];
+        foreach ($brigadas as $brigada) {
+            $brigadas_array[$cont] = $brigada;
+            $cont++;
+        }
+        $cont2 = 0;
+        foreach ($clases as $clase1) {
+            $brigadas2 = $clase1->brigadas;
+            foreach ($brigadas2 as $brig) {
+
+                foreach ($brigadas as $brigada) {
+
+
+                    if ($brig->id == $brigada->id || $clase1->id == $clase->id) {
+                        $diaSemana = $clase1->fecha;
+                        $turno = $clase1->turn;
+                        $matrizDisponibilidad[$turno - 1][$diaSemana - 1] = false;
+                    }
+                }
+            }
+        }
+        $data = [
+
+            "Matriz Disponiblidad" => $matrizDisponibilidad,
+
+        ];
+        return response()->json($matrizDisponibilidad);
     }
 }

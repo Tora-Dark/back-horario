@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brigada;
 use App\Models\Clase;
+use App\Models\Horario;
 use Illuminate\Http\Request;
 
 class ClaseController extends Controller
@@ -131,5 +133,5 @@ public function attach(Request $request){
     return response()->json($data);
 }
 
-
 }
+

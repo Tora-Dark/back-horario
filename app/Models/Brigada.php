@@ -11,6 +11,6 @@ class Brigada extends Model
 
     public function clases()
     {
-        return $this->belongsToMany(Clase::class, 'clases_brigadas', 'clases_id','brigada_id');
+        return $this->belongsToMany(Clase::class, 'clases_brigadas','brigada_id', 'clases_id');
     }
 }
