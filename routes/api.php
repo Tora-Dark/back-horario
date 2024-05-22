@@ -7,6 +7,7 @@ use App\Http\Controllers\CursosController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\LocalController;
 use App\Http\Controllers\ProfesorController;
+use App\Http\Controllers\BalanceDeCargaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +67,7 @@ Route::controller(CursosController::class)->group(function () {
     Route::put('/cursos/{curso}', 'update');
     Route::delete('/cursos/{curso}', 'destroy');
     Route::post('/cursos/clases', 'attach');
+    Route::post('/cursos/upload','upload');
 });
 
 
@@ -78,4 +80,19 @@ Route::controller(HorarioController::class)->group( function () {
     Route::post('/horarios/clases','attach');
     Route::get('/horarios/Getmatriz/{horario}/{clase}','Getmatriz');
 
+});
+
+/* Route::get('/balance_de_carga', [BalanceDeCargaController::class, 'index']);
+Route::post('/balance_de_carga', [BalanceDeCargaController::class, 'store']);
+Route::get('/balance_de_carga/{id}', [BalanceDeCargaController::class, 'show']);
+Route::put('/balance_de_carga/{id}', [BalanceDeCargaController::class, 'update']);
+Route::delete('/balance_de_carga/{id}', [BalanceDeCargaController::class, 'delete']);
+ */
+Route::controller(BalanceDeCargaController::class)->group(function () {
+    Route::get('/balance_de_carga/{horario}', 'index');
+    Route::post('/balance_de_carga', 'store');
+    Route::get('/balance_de_carga/{balance}', 'show');
+    Route::put('/balance_de_carga/{balance}', 'update');
+    Route::delete('/balance_de_carga/{balance}', 'destroy');
+    Route::post('/balance_de_carga/balance', 'attach');
 });

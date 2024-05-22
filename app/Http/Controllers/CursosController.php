@@ -88,4 +88,23 @@ public function destroy(Cursos $curso)
     ];
     return response()->json($data);
 }
+
+public function upload(Request $request)
+{
+    $request->validate([
+        'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'description' => 'required|string|max:255',
+    ]);
+
+    $path = $request->file('file')->store('public/uploads');
+    $description = $request->input('description');
+
+    // Aquí puedes guardar la información en la base de datos si lo deseas
+
+    return response()->json([
+        'message' => 'File uploaded successfully',
+        'path' => $path,
+        'description' => $description,
+    ]);
+}
 }
