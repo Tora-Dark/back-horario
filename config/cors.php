@@ -17,9 +17,9 @@ return [
 
         'paths' => ['api/*', 'sanctum/csrf-cookie'],
         'allowed_methods' => ['*'],
-        'allowed_origins' => ['http://localhost:5173/Horario/','http://localhost:5173'], // URL de tu frontend
+        'allowed_origins' => ['http://localhost:5173'], // URL de tu frontend
         'allowed_origins_patterns' => [],
-        'allowed_headers' => ['*'],
+        'allowed_headers' => ['http://localhost:5173'],
         'exposed_headers' => [],
         'max_age' => 0,
         'supports_credentials' => false,
