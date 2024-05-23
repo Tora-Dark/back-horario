@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     // app/Http/Middleware/VerifyCsrfToken.php
 protected $except = [
-    'https://back-horario-production.up.railway.app', // Cambia esto por la URL correcta de tu API
+    'https://back-horario-production.up.railway.app/*',
+    'http://localhost:5173'
 ];
 }
