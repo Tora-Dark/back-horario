@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Sanctum\SanctumServiceProvider;
 
 return [
 
@@ -163,6 +164,7 @@ return [
         /*
          * Application Service Providers...
          */
+        Laravel\Sanctum\SanctumServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,

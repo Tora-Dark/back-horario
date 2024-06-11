@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AsignaturaController;
 use App\Http\Controllers\BrigadaController;
 use App\Http\Controllers\ClaseController;
@@ -32,7 +33,7 @@ Route::get('/clases/{clase}', [ClaseController::class, 'show']);
 Route::post('/clases', [ClaseController::class, 'store']);
 Route::put('/clases/{clase}', [ClaseController::class, 'update']);
 Route::delete('/clases/{clase}', [ClaseController::class, 'destroy']);
-Route::post('/clases/brigadas',[ClaseController::class, 'attach']);
+Route::post('/clases/brigadas', [ClaseController::class, 'attach']);
 
 Route::get('/profesores', [ProfesorController::class, 'index']);
 Route::post('/profesores', [ProfesorController::class, 'store']);
@@ -67,19 +68,18 @@ Route::controller(CursosController::class)->group(function () {
     Route::put('/cursos/{curso}', 'update');
     Route::delete('/cursos/{curso}', 'destroy');
     Route::post('/cursos/clases', 'attach');
-    Route::post('/cursos/upload','upload');
+    Route::post('/cursos/upload', 'upload');
 });
 
 
-Route::controller(HorarioController::class)->group( function () {
-    Route::get('/horarios','index');
-    Route::post('/horarios','store');
-    Route::get('/horarios/{horario}','show');
-    Route::put('/horarios/{horario}','update');
-    Route::delete('/horarios/{horario}','destroy');
-    Route::post('/horarios/clases','attach');
-    Route::get('/horarios/Getmatriz/{horario}/{clase}','Getmatriz');
-
+Route::controller(HorarioController::class)->group(function () {
+    Route::get('/horarios', 'index');
+    Route::post('/horarios', 'store');
+    Route::get('/horarios/{horario}', 'show');
+    Route::put('/horarios/{horario}', 'update');
+    Route::delete('/horarios/{horario}', 'destroy');
+    Route::post('/horarios/clases', 'attach');
+    Route::get('/horarios/Getmatriz/{horario}/{clase}', 'Getmatriz');
 });
 
 /* Route::get('/balance_de_carga', [BalanceDeCargaController::class, 'index']);
@@ -95,4 +95,12 @@ Route::controller(BalanceDeCargaController::class)->group(function () {
     Route::put('/balance_de_carga/{balance}', 'update');
     Route::delete('/balance_de_carga/{balance}', 'destroy');
     Route::post('/balance_de_carga/balance', 'attach');
+});
+
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('me', [AuthController::class, 'me']);
 });
